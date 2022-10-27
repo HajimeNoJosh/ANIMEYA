@@ -1,6 +1,8 @@
 function Input(props) {
   return (
-    <input value={props.value} onChange={props.handleChange} className="App">{props.title}</input>
+    <input value={props.value} onChange={props.handleChange} className="App">
+      {props.title}
+    </input>
   );
 }
 

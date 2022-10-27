@@ -13,6 +13,9 @@ import {
 import HomePage from "./pages/home_page";
 import JoinRoom from "./pages/join_room";
 import CardPage from "./pages/card_page";
+import WaitingPage from "./pages/waiting_page";
+import FailedPage from "./pages/failed_page";
+import FoundPage from "./pages/found_page";
 
 const base_url = window.location.origin;
 const serverType = base_url.includes("localhost")
@@ -44,7 +47,6 @@ function App() {
       <div className="app">
         <Routes>
           <Route
-            exact
             path="/"
             element={
               <HomePage
@@ -55,50 +57,13 @@ function App() {
             }
           />
           <Route
-            exact
             path="/join_room"
             element={<JoinRoom token={stateObj.user.token} />}
           />
           <Route path="/card" element={<CardPage />} />
-          <Route
-            path="/waiting"
-            element={
-              <div className="page waiting_page">
-                <Title title="Animeya"></Title>
-                <Subtitle subtitle="Please Wait"></Subtitle>
-                <Paragraph text="Please wait until the members of your party have finished liking or disliking their anime"></Paragraph>
-              </div>
-            }
-          />
-          <Route
-            path="/failed"
-            element={
-              <div className="page failed_page">
-                <Title title="Animeya"></Title>
-                <Subtitle subtitle="Match Failed"></Subtitle>
-                <Paragraph text="Sorry no one could agree on any anime"></Paragraph>
-                <Button title="Restart"></Button>
-                <Paragraph text="OR"></Paragraph>
-                <Paragraph text="Check out these anime that people did like!"></Paragraph>
-                <div>
-                  <Card></Card>
-                  <Subtitle subtitle="One Piece"></Subtitle>
-                  <Paragraph text="1 like"></Paragraph>
-                </div>
-              </div>
-            }
-          />
-          <Route
-            path="/found"
-            element={
-              <div className="page found_page">
-                <Title title="Animeya"></Title>
-                <Subtitle subtitle="Match Found"></Subtitle>
-                <Card></Card>
-                <Subtitle subtitle="One Piece"></Subtitle>
-              </div>
-            }
-          />
+          <Route path="/waiting" element={<WaitingPage />} />
+          <Route path="/failed" element={<FailedPage />} />
+          <Route path="/found" element={<FoundPage />} />
         </Routes>
       </div>
     </Router>
