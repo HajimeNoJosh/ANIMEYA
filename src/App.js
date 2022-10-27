@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     if (stateObj.stateStatus === 'creating owner') {
       axios
-      .post(`${serverType}/owner`, username)
+      .post(`${serverType}/owner`, {username})
       .then((res) => {
         setStateObj(prevState => ({...prevState, stateStatus: 'joining room'}))
         setStateObj(prevState => ({...prevState, user: res.data}))
@@ -39,7 +39,7 @@ function App() {
     <Router>
       <div className='app'>
       <Routes>
-        <Route exact path="/" element={<HomePage setStateObj={setStateObj}/>}/>
+        <Route exact path="/" element={<HomePage username={username} setUsername={setUsername} setStateObj={setStateObj}/>}/>
         <Route exact path="/join_room" element={<JoinRoom token={stateObj.user.token}/>}/>
         <Route path="/card" element={<div className="page card_page">
             <Title title="Animeya"></Title>
