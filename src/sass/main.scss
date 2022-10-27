@@ -1,0 +1,24 @@
+@import './base/typography';
+@import './base/home';
+@import './base/reset';
+
+body {
+    background-color: #FBF7F4;
+}
+.app {
+    height: 100%;
+}
+
+.page {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.gap {
+    display: flex;
+    gap: 1rem;
+}
