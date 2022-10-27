@@ -3,13 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 
 import "./sass/main.scss";
-import {
-  Title,
-  Subtitle,
-  Button,
-  Card,
-  Paragraph,
-} from "./components/export.js";
 import HomePage from "./pages/home_page";
 import JoinRoom from "./pages/join_room";
 import CardPage from "./pages/card_page";
@@ -35,9 +28,9 @@ function App() {
       axios.post(`${serverType}/owner`, { username }).then((res) => {
         setStateObj((prevState) => ({
           ...prevState,
+          user: res.data,
           stateStatus: "joining room",
         }));
-        setStateObj((prevState) => ({ ...prevState, user: res.data }));
       });
     }
   }, [stateObj.stateStatus, username]);
@@ -58,7 +51,7 @@ function App() {
           />
           <Route
             path="/join_room"
-            element={<JoinRoom token={stateObj.user.token} />}
+            element={<JoinRoom username={username} stateObj={stateObj} />}
           />
           <Route path="/card" element={<CardPage />} />
           <Route path="/waiting" element={<WaitingPage />} />
