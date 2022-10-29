@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import "./sass/main.scss";
-import HomePage from "./pages/home_page";
-import JoinRoom from "./pages/join_room";
-import CardPage from "./pages/card_page";
-import WaitingPage from "./pages/waiting_page";
-import FailedPage from "./pages/failed_page";
-import FoundPage from "./pages/found_page";
+
+import AllRoutes from "./pages/routes";
 
 const base_url = window.location.origin;
 const serverType = base_url.includes("localhost")
@@ -23,41 +18,16 @@ function App() {
     anime: {},
   });
 
-  useEffect(() => {
-    if (stateObj.stateStatus === "creating owner") {
-      axios.post(`${serverType}/owner`, { username }).then((res) => {
-        setStateObj((prevState) => ({
-          ...prevState,
-          user: res.data,
-          stateStatus: "joining room",
-        }));
-      });
-    }
-  }, [stateObj.stateStatus, username]);
-
   return (
     <Router>
       <div className="app">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <HomePage
-                username={username}
-                setUsername={setUsername}
-                setStateObj={setStateObj}
-              />
-            }
-          />
-          <Route
-            path="/join_room"
-            element={<JoinRoom username={username} stateObj={stateObj} />}
-          />
-          <Route path="/card" element={<CardPage />} />
-          <Route path="/waiting" element={<WaitingPage />} />
-          <Route path="/failed" element={<FailedPage />} />
-          <Route path="/found" element={<FoundPage />} />
-        </Routes>
+        <AllRoutes
+          username={username}
+          setUsername={setUsername}
+          stateObj={stateObj}
+          setStateObj={setStateObj}
+          serverType={serverType}
+        ></AllRoutes>
       </div>
     </Router>
   );

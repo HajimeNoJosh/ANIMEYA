@@ -1,14 +1,13 @@
 import { Title, Subtitle, Input, Button } from "../components/export.js";
-import { useNavigate } from "react-router-dom";
 
 function HomePage(props) {
-  let navigate = useNavigate();
   const handleSubmit = (e) => {
+    e.preventDefault();
+
     props.setStateObj((prevState) => ({
       ...prevState,
-      stateStatus: "creating owner",
+      stateStatus: "creatingOwner",
     }));
-    navigate("/join_room");
   };
 
   const handleChange = (event) => {
@@ -22,7 +21,7 @@ function HomePage(props) {
       <Title title="Sign Up"></Title>
       <form onSubmit={handleSubmit}>
         <Input value={props.username} handleChange={handleChange}></Input>
-        <Button needs_link={true} title="Sign Up"></Button>
+        <Button title="Sign Up"></Button>
       </form>
     </div>
   );

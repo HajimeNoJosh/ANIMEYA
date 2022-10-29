@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
 import { Title, Subtitle, Input, Button } from "../components/export.js";
-import { useNavigate } from "react-router-dom";
 
 function JoinRoom(props) {
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (props.stateObj.stateStatus === "initial") {
-      navigate("/");
-    }
-  }, [navigate, props.stateObj.stateStatus]);
+  const onClick = () => {
+    props.setStateObj((prevState) => ({
+      ...prevState,
+      stateStatus: "getAnime",
+    }));
+  };
 
   return (
     <div className="page join_room_page">
@@ -17,7 +14,7 @@ function JoinRoom(props) {
       <Subtitle subtitle={"Welcome " + props.username}></Subtitle>
       <Input></Input>
       <Button title="Copy Link"></Button>
-      <Button title="Start"></Button>
+      <Button onClick={onClick} title="Start"></Button>
     </div>
   );
 }
