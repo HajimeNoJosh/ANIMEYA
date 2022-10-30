@@ -43,7 +43,7 @@ function AllRoutes({
     if (stateObj.stateStatus === "initial") {
       navigate("/");
     }
-  }, [stateObj.stateStatus, username]);
+  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username]);
 
   return (
     <Routes>
@@ -67,7 +67,7 @@ function AllRoutes({
           />
         }
       />
-      <Route path="/card" element={<CardPage />} />
+      <Route path="/card" element={<CardPage anime={stateObj.anime} />} />
       <Route path="/waiting" element={<WaitingPage />} />
       <Route path="/failed" element={<FailedPage />} />
       <Route path="/found" element={<FoundPage />} />

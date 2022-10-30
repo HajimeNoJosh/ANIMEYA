@@ -1,11 +1,16 @@
 function Card(props) {
   return (
-    <img 
-    src="https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png" 
-    alt="Filler image" 
-    width="250" 
-    height="250" 
-    className="App"></img>
+    <img
+      src={
+        props.anime.data
+          ? props.anime.data.Page.media[0].coverImage.extraLarge
+          : "https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png"
+      }
+      alt="Filler"
+      width="225"
+      height="337"
+      className="App"
+    ></img>
   );
 }
 
