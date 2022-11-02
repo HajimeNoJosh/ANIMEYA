@@ -12,6 +12,16 @@ function Card(props) {
     currentAnimeId = props.anime[currentIndex].id;
     el = document.getElementById(`anime-card-${currentAnimeId}`);
     el.classList.remove("hidden");
+    const params = {
+      room_token: props.stateObj.user.room_token,
+      swipe_type: type,
+      anime_id: currentAnimeId,
+      user_id: props.stateObj.user.id,
+    };
+
+    props.axios.post(`${props.serverType}/swipes`, params).then((res) => {
+      console.log(res);
+    });
   };
 
   return props.anime.map((anime, i) => {

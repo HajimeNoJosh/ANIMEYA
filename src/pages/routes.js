@@ -21,7 +21,7 @@ function AllRoutes({
 
   useEffect(() => {
     if (stateObj.stateStatus === "creatingOwner") {
-      axios.post(`${serverType}/owner`, { username }).then((res) => {
+      axios.post(`${serverType}/users`, { username }).then((res) => {
         setStateObj((prevState) => ({
           ...prevState,
           user: res.data,
@@ -67,7 +67,17 @@ function AllRoutes({
           />
         }
       />
-      <Route path="/card" element={<CardPage anime={stateObj.anime} />} />
+      <Route
+        path="/card"
+        element={
+          <CardPage
+            stateObj={stateObj}
+            serverType={serverType}
+            axios={axios}
+            anime={stateObj.anime}
+          />
+        }
+      />
       <Route path="/waiting" element={<WaitingPage />} />
       <Route path="/failed" element={<FailedPage />} />
       <Route path="/found" element={<FoundPage />} />
