@@ -20,7 +20,11 @@ function HomePage(props) {
       <Subtitle subtitle="Make all your dreams come true"></Subtitle>
       <Title title="Sign Up"></Title>
       <form onSubmit={handleSubmit}>
-        <Input value={props.username} handleChange={handleChange}></Input>
+        <Input
+          required={true}
+          value={props.username}
+          handleChange={handleChange}
+        ></Input>
         <Button title="Sign Up"></Button>
       </form>
     </div>

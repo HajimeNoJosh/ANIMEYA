@@ -21,14 +21,19 @@ function AllRoutes({
 
   useEffect(() => {
     if (stateObj.stateStatus === "creatingOwner") {
-      axios.post(`${serverType}/users`, { username }).then((res) => {
-        setStateObj((prevState) => ({
-          ...prevState,
-          user: res.data,
-          stateStatus: "joiningRoom",
-        }));
-        navigate("/joinRoom");
-      });
+      axios
+        .post(`${serverType}/users`, {
+          username: username,
+          token: stateObj.tempToken,
+        })
+        .then((res) => {
+          setStateObj((prevState) => ({
+            ...prevState,
+            user: res.data,
+            stateStatus: "joiningRoom",
+          }));
+          navigate(`/joinRoom/${res.data.room_token}`);
+        });
     }
 
     if (stateObj.stateStatus === "getAnime") {
@@ -48,6 +53,7 @@ function AllRoutes({
   return (
     <Routes>
       <Route
+        exact
         path="/"
         element={
           <HomePage
@@ -57,16 +63,18 @@ function AllRoutes({
           />
         }
       />
-      <Route
-        path="/joinRoom"
-        element={
-          <JoinRoom
-            setStateObj={setStateObj}
-            username={username}
-            stateObj={stateObj}
-          />
-        }
-      />
+      <Route path="joinRoom">
+        <Route
+          path=":token"
+          element={
+            <JoinRoom
+              setStateObj={setStateObj}
+              username={username}
+              stateObj={stateObj}
+            />
+          }
+        />
+      </Route>
       <Route
         path="/card"
         element={

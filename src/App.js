@@ -14,6 +14,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [stateObj, setStateObj] = useState({
     stateStatus: "initial",
+    tempToken: "",
     user: {},
     anime: {},
   });
