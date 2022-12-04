@@ -6,22 +6,28 @@ function Card(props) {
 
   const votedAnime = (type) => {
     currentIndex++;
-    let el = document.getElementById(`anime-card-${currentAnimeId}`);
-    el.classList.add("hidden");
-
-    currentAnimeId = props.anime[currentIndex].id;
-    el = document.getElementById(`anime-card-${currentAnimeId}`);
-    el.classList.remove("hidden");
-    const params = {
-      room_token: props.stateObj.user.room_token,
-      swipe_type: type,
-      anime_id: currentAnimeId,
-      user_id: props.stateObj.user.id,
-    };
-
-    props.axios.post(`${props.serverType}/swipes`, params).then((res) => {
-      console.log(res);
-    });
+    if (typeof props.anime[currentIndex] === "undefined") {
+      props.setStateObj((prevState) => ({
+        ...prevState,
+        stateStatus: "foundPage",
+      }));
+    } else {
+      let el = document.getElementById(`anime-card-${currentAnimeId}`);
+      el.classList.add("hidden");
+  
+      currentAnimeId = props.anime[currentIndex].id;
+      el = document.getElementById(`anime-card-${currentAnimeId}`);
+      el.classList.remove("hidden");
+      const params = {
+        room_token: props.stateObj.user.room_token,
+        swipe_type: type,
+        anime_id: currentAnimeId,
+        user_id: props.stateObj.user.id,
+      };
+      props.axios.post(`${props.serverType}/swipes`, params).then((res) => {
+        console.log(res);
+      });
+    }
   };
 
   return props.anime.map((anime, i) => {
@@ -41,10 +47,10 @@ function Card(props) {
         <Subtitle subtitle={anime.title.english}></Subtitle>
         <div className="gap">
           <Button
-            onClick={() => votedAnime("dislike")}
-            title="Dislike"
+            onClick={() => votedAnime("not_interested")}
+            title="Not watching this season"
           ></Button>
-          <Button onClick={() => votedAnime("like")} title="Like"></Button>
+          <Button onClick={() => votedAnime("want_to_watch")} title="Want to watch this sesaon"></Button>
         </div>
       </div>
     );

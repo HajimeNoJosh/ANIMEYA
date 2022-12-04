@@ -30,9 +30,8 @@ function AllRoutes({
           setStateObj((prevState) => ({
             ...prevState,
             user: res.data,
-            stateStatus: "joiningRoom",
+            stateStatus: "getAnime",
           }));
-          navigate(`/joinRoom/${res.data.room_token}`);
         });
     }
 
@@ -45,10 +44,14 @@ function AllRoutes({
       navigate("/card");
     }
 
+    if (stateObj.stateStatus === "foundPage") {
+      navigate("/found")
+    }
+
     if (stateObj.stateStatus === "initial") {
       navigate("/");
     }
-  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username]);
+  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username, stateObj.tempToken]);
 
   return (
     <Routes>
@@ -76,6 +79,7 @@ function AllRoutes({
         />
       </Route>
       <Route
+        exact
         path="/card"
         element={
           <CardPage
@@ -83,12 +87,13 @@ function AllRoutes({
             serverType={serverType}
             axios={axios}
             anime={stateObj.anime}
+            setStateObj={setStateObj}
           />
         }
       />
       <Route path="/waiting" element={<WaitingPage />} />
       <Route path="/failed" element={<FailedPage />} />
-      <Route path="/found" element={<FoundPage />} />
+      <Route exact path="/found" element={<FoundPage />} />
     </Routes>
   );
 }

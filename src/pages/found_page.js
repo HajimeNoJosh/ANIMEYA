@@ -5,7 +5,6 @@ function FoundPage(props) {
     <div className="page found_page">
       <Title title="Animeya"></Title>
       <Subtitle subtitle="Match Found"></Subtitle>
-      <Card></Card>
       <Subtitle subtitle="One Piece"></Subtitle>
     </div>
   );

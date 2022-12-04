@@ -6,6 +6,7 @@ function CardPage(props) {
       <Title title="Animeya"></Title>
       <Card
         stateObj={props.stateObj}
+        setStateObj={props.setStateObj}
         serverType={props.serverType}
         axios={props.axios}
         anime={props.anime.data.Page.media}
