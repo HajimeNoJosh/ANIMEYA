@@ -5,11 +5,11 @@ function CardPage(props) {
     <div className="page card_page">
       <Title title="Animeya"></Title>
       <Card
+        shouldShow={false}
+        anime={props.anime.data.Page.media}
         stateObj={props.stateObj}
-        setStateObj={props.setStateObj}
         serverType={props.serverType}
         axios={props.axios}
-        anime={props.anime.data.Page.media}
       ></Card>
     </div>
   ) : (

@@ -1,10 +1,14 @@
+import { Fragment } from "react";
 import { Subtitle, Button } from "../components/export.js";
 
 function Card(props) {
   let currentIndex = 0;
   let currentAnimeId = props.anime[currentIndex].id;
+  let air_dates = props.anime[currentIndex].airingSchedule.nodes;
+  let currentMalId = props.anime[currentIndex].idMal
 
   const votedAnime = (type) => {
+    console.log(air_dates)
     currentIndex++;
     if (typeof props.anime[currentIndex] === "undefined") {
       props.setStateObj((prevState) => ({
@@ -23,9 +27,13 @@ function Card(props) {
         swipe_type: type,
         anime_id: currentAnimeId,
         user_id: props.stateObj.user.id,
+        mal_id: currentMalId,
+        air_dates: air_dates
       };
+      currentMalId = props.anime[currentIndex].idMal;
+      air_dates = props.anime[currentIndex].airingSchedule.nodes;
+      
       props.axios.post(`${props.serverType}/swipes`, params).then((res) => {
-        console.log(res);
       });
     }
   };
@@ -51,7 +59,7 @@ function Card(props) {
             title="Not watching this season"
           ></Button>
           <Button onClick={() => votedAnime("want_to_watch")} title="Want to watch this sesaon"></Button>
-        </div>
+        </div> : <Fragment></Fragment>
       </div>
     );
   });

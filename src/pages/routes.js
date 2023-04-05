@@ -45,13 +45,25 @@ function AllRoutes({
     }
 
     if (stateObj.stateStatus === "foundPage") {
+      const params = {
+        room_token: stateObj.user.room_token,
+        user_id: stateObj.user.id,
+      };
+      axios
+        .get(`${serverType}/anime_list`, {params})
+        .then((res) => {
+          setStateObj((prevState) => ({
+            ...prevState,
+            anime: res.data,
+          }));
+        })
       navigate("/found")
     }
 
     if (stateObj.stateStatus === "initial") {
       navigate("/");
     }
-  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username, stateObj.tempToken]);
+  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username, stateObj.tempToken, stateObj.user.id, stateObj.user.room_token]);
 
   return (
     <Routes>
@@ -93,7 +105,7 @@ function AllRoutes({
       />
       <Route path="/waiting" element={<WaitingPage />} />
       <Route path="/failed" element={<FailedPage />} />
-      <Route exact path="/found" element={<FoundPage />} />
+      <Route exact path="/found" element={<FoundPage anime={stateObj.anime} />} />
     </Routes>
   );
 }

@@ -1,11 +1,40 @@
 export function APICall(setStateObj) {
-  // Here we define our query as a multi-line string
-  // Storing it in a separate .graphql/.gql file is also possible
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  let currentSeason = '';
+  const month = currentDate.getMonth();
+
+  switch (month) {
+    case 12:
+    case 1:
+    case 2:
+      currentSeason = 'WINTER';
+      break;
+    case 3:
+    case 4:
+    case 5:
+      currentSeason = 'SPRING';
+      break;
+    case 6:
+    case 7:
+    case 8:
+      currentSeason = 'SUMMER';
+      break;
+    case 9:
+    case 10:
+    case 11:
+      currentSeason = 'FALL';
+      break;
+    default:
+      currentSeason = 'WINTER';
+  }
+  
   const query = `
-    query ($id: Int) { # Define which variables will be used in the query (id)
+    query ($id: Int, $year: Int, $season: MediaSeason) {
       Page (page: 1, perPage: 20) {
-        media (id: $id, type: ANIME, status: RELEASING, season: FALL, seasonYear: 2022, format: TV) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
+        media (id: $id, type: ANIME, status: RELEASING, season: $season, seasonYear: $year, format: TV) {
           id
+          idMal
           title {
             romaji
             english
@@ -16,6 +45,11 @@ export function APICall(setStateObj) {
             extraLarge
           }
           averageScore
+          airingSchedule {
+            nodes {
+              airingAt
+            }
+          }
         }
         
         pageInfo {
@@ -27,32 +61,40 @@ export function APICall(setStateObj) {
         }
       }
     }
-`;
+  `;
 
-  // Define the config we'll need for our Api request
-  var url = "https://graphql.anilist.co",
-    options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        query: query,
-      }),
-    };
+  const variables = {
+    year: currentYear,
+    season: currentSeason,
+  };
+
+  const url = 'https://graphql.anilist.co';
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: query,
+      variables: variables,
+    }),
+  };
 
   function handleResponse(response) {
     return response.json().then(function (json) {
-      return response.ok ? json : Promise.reject(json);
+      return response.ok ? json : Promise.reject(json.errors[0].message);
     });
   }
 
   function handleData(data) {
+    console.log(data)
     setStateObj((prevState) => ({
       ...prevState,
       anime: data,
     }));
   }
+  
   fetch(url, options).then(handleResponse).then(handleData);
 }

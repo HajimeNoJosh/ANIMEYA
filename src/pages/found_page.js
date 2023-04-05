@@ -1,11 +1,14 @@
 import { Title, Subtitle, Card } from "../components/export.js";
 
 function FoundPage(props) {
-  return (
-    <div className="page found_page">
+  console.log(props.anime)
+  return props.anime ? (
+    <div className="page card_page">
       <Title title="Animeya"></Title>
-      <Subtitle subtitle="Match Found"></Subtitle>
-      <Subtitle subtitle="One Piece"></Subtitle>
+    </div>
+  ) : (
+    <div className="page">
+      <img src="loading.gif" alt="loading" />
     </div>
   );
 }
