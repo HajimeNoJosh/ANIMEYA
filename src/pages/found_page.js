@@ -1,4 +1,4 @@
-import { Title, Subtitle, Card } from "../components/export.js";
+import { Title } from "../components/export.js";
 
 function FoundPage(props) {
   return props.anime ? (

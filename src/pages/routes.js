@@ -12,7 +12,6 @@ import FoundPage from "../pages/found_page";
 
 function AllRoutes({
   username,
-  setUsername,
   stateObj,
   setStateObj,
   serverType,
@@ -20,7 +19,7 @@ function AllRoutes({
   let navigate = useNavigate();
 
   useEffect(() => {
-    if (stateObj.anime.length == 0) {
+    if (stateObj.anime.length === 0) {
       APICall(setStateObj);
     }
 
@@ -49,10 +48,10 @@ function AllRoutes({
     }
 
     if (stateObj.stateStatus === "foundPage") {
-      const params = {
-        room_token: stateObj.user.room_token,
-        user_id: stateObj.user.id,
-      };
+      // const params = {
+      //   room_token: stateObj.user.room_token,
+      //   user_id: stateObj.user.id,
+      // };
       // axios
       //   .get(`${serverType}/anime_list`, {params})
       //   .then((res) => {
@@ -67,7 +66,7 @@ function AllRoutes({
     if (stateObj.stateStatus === "initial") {
       navigate("/");
     }
-  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username, stateObj.tempToken, stateObj.user.id, stateObj.user.room_token, stateObj.anime.data]);
+  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username, stateObj.tempToken, stateObj.user.id, stateObj.user.room_token, stateObj.anime.data, stateObj.anime.length]);
 
   return (
     <Routes>
