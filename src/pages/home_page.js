@@ -17,14 +17,6 @@ function HomePage(props) {
   return props.anime.length > 0 ? (
     <div className="page card_page">
       <Title title="Animeya"></Title>
-      {/* <Card
-          shouldShow={false}
-          anime={props.anime.data.Page.media}
-          stateObj={props.stateObj}
-          serverType={props.serverType}
-          axios={props.axios}
-          setStateObj={props.setStateObj}
-        ></Card> */}
       <Calendar anime={props.anime} />
     </div>
   ) : (
