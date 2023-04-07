@@ -1,4 +1,4 @@
 {
     "prettier.embeddedLanguageFormatting": "off",
-    "prettier.enable": false
+    "prettier.enable": true
 }

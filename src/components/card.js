@@ -8,7 +8,7 @@ function Card(props) {
   let currentMalId = props.anime[currentIndex].idMal
 
   const votedAnime = (type) => {
-    console.log(air_dates)
+    // console.log(air_dates)
     currentIndex++;
     if (typeof props.anime[currentIndex] === "undefined") {
       props.setStateObj((prevState) => ({
@@ -33,12 +33,14 @@ function Card(props) {
       currentMalId = props.anime[currentIndex].idMal;
       air_dates = props.anime[currentIndex].airingSchedule.nodes;
       
-      props.axios.post(`${props.serverType}/swipes`, params).then((res) => {
-      });
+      // props.axios.post(`${props.serverType}/swipes`, params).then((res) => {
+      // });
     }
   };
 
   return props.anime.map((anime, i) => {
+    const title = anime.title.english ? anime.title.english : anime.title.romaji ? anime.title.romaji : anime.title.native;
+    
     return (
       <div
         key={i}
@@ -52,7 +54,7 @@ function Card(props) {
           height="337"
           className="App"
         ></img>
-        <Subtitle subtitle={anime.title.english}></Subtitle>
+        <Subtitle subtitle={title}></Subtitle>
         <div className="gap">
           <Button
             onClick={() => votedAnime("not_interested")}

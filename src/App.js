@@ -16,7 +16,7 @@ function App() {
     stateStatus: "initial",
     tempToken: "",
     user: {},
-    anime: {},
+    anime: [],
   });
 
   return (

@@ -1,7 +1,6 @@
 import { Title, Subtitle, Card } from "../components/export.js";
 
 function FoundPage(props) {
-  console.log(props.anime)
   return props.anime ? (
     <div className="page card_page">
       <Title title="Animeya"></Title>

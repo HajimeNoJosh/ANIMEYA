@@ -20,6 +20,10 @@ function AllRoutes({
   let navigate = useNavigate();
 
   useEffect(() => {
+    if (stateObj.anime.length == 0) {
+      APICall(setStateObj);
+    }
+
     if (stateObj.stateStatus === "creatingOwner") {
       axios
         .post(`${serverType}/users`, {
@@ -49,21 +53,21 @@ function AllRoutes({
         room_token: stateObj.user.room_token,
         user_id: stateObj.user.id,
       };
-      axios
-        .get(`${serverType}/anime_list`, {params})
-        .then((res) => {
-          setStateObj((prevState) => ({
-            ...prevState,
-            anime: res.data,
-          }));
-        })
+      // axios
+      //   .get(`${serverType}/anime_list`, {params})
+      //   .then((res) => {
+      //     setStateObj((prevState) => ({
+      //       ...prevState,
+      //       anime: res.data,
+      //     }));
+      //   })
       navigate("/found")
     }
 
     if (stateObj.stateStatus === "initial") {
       navigate("/");
     }
-  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username, stateObj.tempToken, stateObj.user.id, stateObj.user.room_token]);
+  }, [navigate, serverType, setStateObj, stateObj.stateStatus, username, stateObj.tempToken, stateObj.user.id, stateObj.user.room_token, stateObj.anime.data]);
 
   return (
     <Routes>
@@ -72,8 +76,10 @@ function AllRoutes({
         path="/"
         element={
           <HomePage
-            username={username}
-            setUsername={setUsername}
+            stateObj={stateObj}
+            serverType={serverType}
+            axios={axios}
+            anime={stateObj.anime}
             setStateObj={setStateObj}
           />
         }

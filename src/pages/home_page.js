@@ -1,4 +1,4 @@
-import { Title, Subtitle, Input, Button } from "../components/export.js";
+import { Title, Card, Calendar } from "../components/export.js";
 
 function HomePage(props) {
   const handleSubmit = (e) => {
@@ -14,19 +14,22 @@ function HomePage(props) {
     props.setUsername(event.target.value);
   };
 
-  return (
-    <div className="page sign_up_page">
+  return props.anime.length > 0 ? (
+    <div className="page card_page">
       <Title title="Animeya"></Title>
-      <Subtitle subtitle="Make all your dreams come true"></Subtitle>
-      <Title title="Sign Up"></Title>
-      <form onSubmit={handleSubmit}>
-        <Input
-          required={true}
-          value={props.username}
-          handleChange={handleChange}
-        ></Input>
-        <Button title="Sign Up"></Button>
-      </form>
+      {/* <Card
+          shouldShow={false}
+          anime={props.anime.data.Page.media}
+          stateObj={props.stateObj}
+          serverType={props.serverType}
+          axios={props.axios}
+          setStateObj={props.setStateObj}
+        ></Card> */}
+      <Calendar anime={props.anime} />
+    </div>
+  ) : (
+    <div className="page">
+      <img src="loading.gif" alt="loading" />
     </div>
   );
 }

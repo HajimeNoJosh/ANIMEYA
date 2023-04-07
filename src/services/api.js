@@ -28,11 +28,11 @@ export function APICall(setStateObj) {
     default:
       currentSeason = 'WINTER';
   }
-  
+
   const query = `
-    query ($id: Int, $year: Int, $season: MediaSeason) {
-      Page (page: 1, perPage: 20) {
-        media (id: $id, type: ANIME, status: RELEASING, season: $season, seasonYear: $year, format: TV) {
+    query ($id: Int, $year: Int, $season: MediaSeason, $page: Int) {
+      Page (page: $page, perPage: 20) {
+        media (id: $id, type: ANIME, season: $season, seasonYear: $year, format: TV) {
           id
           idMal
           title {
@@ -66,6 +66,7 @@ export function APICall(setStateObj) {
   const variables = {
     year: currentYear,
     season: currentSeason,
+    page: 1,
   };
 
   const url = 'https://graphql.anilist.co';
@@ -89,12 +90,23 @@ export function APICall(setStateObj) {
   }
 
   function handleData(data) {
-    console.log(data)
-    setStateObj((prevState) => ({
+    const ani = data.data.Page.media
+    setStateObj(prevState => ({
       ...prevState,
-      anime: data,
+      anime: [
+        ...(prevState.anime),
+        ...ani
+      ]
     }));
+
+    if (data.data.Page.pageInfo.hasNextPage) {
+      // Make another request for the next page
+      const nextPage = data.data.Page.pageInfo.currentPage + 1;
+      const nextVariables = { ...variables, page: nextPage };
+      const nextOptions = { ...options, body: JSON.stringify({ query: query, variables: nextVariables }) };
+      fetch(url, nextOptions).then(handleResponse).then(handleData);
+    }
   }
-  
+
   fetch(url, options).then(handleResponse).then(handleData);
 }
