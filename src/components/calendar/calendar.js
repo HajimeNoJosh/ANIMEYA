@@ -9,6 +9,7 @@ export default function Calendar({ anime }) {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   const [currentDay, setCurrentDay] = useState(new Date());
+  const today = new Date();
 
   const findOutIfAnimeMatchesDay = (dayDate) => {
     let animeToShow = [];
@@ -39,7 +40,11 @@ export default function Calendar({ anime }) {
   }
 
   const changeCurrentDay = (day) => {
-    setCurrentDay(new Date(day.year, day.month, day.number));
+    if (day.year) {
+      setCurrentDay(new Date(day.year, day.month, day.number));
+    } else {
+      setCurrentDay(today)
+    }
   }
 
   const nextDay = () => {
@@ -50,18 +55,16 @@ export default function Calendar({ anime }) {
     setCurrentDay(new Date(currentDay.getFullYear(), currentDay.getMonth() - 1, 1));
   }
 
-
-
   const getCalendarDays = () => {
     const firstDayOfMonth = new Date(currentDay.getFullYear(), currentDay.getMonth(), 1);
     const weekdayOfFirstDay = firstDayOfMonth.getDay();
     let currentDays = [];
 
-    for (let day = 0; day < 42; day++) {
+    for (let day = 0; day < 35; day++) {
       if (day === 0 && weekdayOfFirstDay === 0) {
         firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
       } else if (day === 0) {
-        firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+        firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - 2));
       } else {
         firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
       }
@@ -83,7 +86,7 @@ export default function Calendar({ anime }) {
 
   return (
     <Fragment>
-      <CalendarHeader currentDay={currentDay} months={months} previousDay={previousDay} nextDay={nextDay} />
+      <CalendarHeader changeCurrentDay={changeCurrentDay} currentDay={currentDay} months={months} previousDay={previousDay} nextDay={nextDay} today={today} />
       <div className="calendar-body">
         <TableHeader weekdays={weekdays} />
         <div className="table-content">
@@ -92,7 +95,7 @@ export default function Calendar({ anime }) {
               const animeToShow = findOutIfAnimeMatchesDay(day.date)
               const formattedArray = animeToShow.map((item, index) => (
 
-                <li id={"anime-" + item.title} image={item.image} title={item.title} className='animeContent-anime' key={index}><div className="animeContent-anime-item">{item.title}</div></li>
+                <li id={"anime-" + item.title} image={item.image} title={item.title} className='animeContent-anime' key={index}><div className="animeContent-anime-item truncate">{item.title}</div></li>
               ));
 
               return (

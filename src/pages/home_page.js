@@ -1,22 +1,11 @@
-import { Title, Card, Calendar } from "../components/export.js";
+import { Title, Subtitle, Calendar } from "../components/export.js";
 
 function HomePage(props) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    props.setStateObj((prevState) => ({
-      ...prevState,
-      stateStatus: "creatingOwner",
-    }));
-  };
-
-  const handleChange = (event) => {
-    props.setUsername(event.target.value);
-  };
 
   return props.anime.length > 0 ? (
     <div className="page card_page">
       <Title title="Animeya"></Title>
+      <Subtitle subtitle="Your premier way to get this seasons anime!" />
       <Calendar anime={props.anime} />
     </div>
   ) : (

@@ -80,8 +80,8 @@
   }
   
   .calendar-day {
-    width: 12vw;
-    height: 12vh;
+    width: 14vw;
+    height: 14vh;
     position: relative;
     border: 1px solid #a6a6a6;
     overflow: scroll;
@@ -93,8 +93,9 @@
   
   .calendar-day p {
     position: absolute;
-    right: 10px;
-    color: blue;
+    right: 50%;
+    color: black;
+    font-size: 1.5rem;
   }
   
   .current * {
@@ -109,6 +110,7 @@
   .animeContent {
     font-size: 1rem;
     align-self: flex-start;
+    margin-top: 2rem;
 
     &-anime {
       padding-top: 2%;
@@ -116,9 +118,11 @@
       list-style-type: none;
 
       &-item {
-        padding-top: 5%;
-        padding-bottom: 5%;
-        // background-color: blue;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        color: white;
+        background-color: blue;
+        cursor: pointer;
       }
     }
   }
@@ -129,4 +133,12 @@
     align-items: center;
     background-color: #e07a5f;
     padding: 5%;
+  }
+
+  .truncate {
+    // width: 250px;
+    padding-left: 2%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }

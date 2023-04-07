@@ -1,4 +1,4 @@
-export default function CalendarHeader({ currentDay, months, previousDay, nextDay }) {
+export default function CalendarHeader({ currentDay, months, previousDay, nextDay, changeCurrentDay, today }) {
     return (
         <div className="calendar-header">
             <div className="title">
@@ -7,14 +7,17 @@ export default function CalendarHeader({ currentDay, months, previousDay, nextDa
             <div className="tools">
                 <button onClick={previousDay}>
                     <span className="material-icons">
-                        arrow_back
+                        Previous Month
                     </span>
                 </button>
                 <p>{months[currentDay.getMonth()].substring(0, 3)} {currentDay.getDate()}</p>
                 <button onClick={nextDay}>
                     <span className="material-icons">
-                        arrow_forward
+                        Next Month
                     </span>
+                </button>
+                <button onClick={() => changeCurrentDay(today)}>
+                    Today
                 </button>
             </div>
         </div>
