@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Title, Subtitle, Calendar, MobileCalendar } from "../components/export.js";
 
 function HomePage(props) {
-  const isMobile = window.innerWidth < 768; // Example threshold for mobile screens
+  const isMobile = window.innerWidth < 900; // Example threshold for mobile screens
 
   return props.anime.length > 0 ? (
     <div className="page card_page">
