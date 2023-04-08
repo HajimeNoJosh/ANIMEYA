@@ -1,4 +1,6 @@
 .container {
+    font-size: 2rem;
+    padding: 5%;
     &_header {
         display: flex;
         &-events {
@@ -8,6 +10,7 @@
     &_body {
         &-wrapper {
             display: flex;
+            border-top: 1px solid blue;
             &-anime {
                 width: 100%;
                 margin-left: 15%;
