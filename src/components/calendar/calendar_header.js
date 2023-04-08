@@ -4,6 +4,9 @@ export default function CalendarHeader({ currentDay, months, previousDay, nextDa
             <div className="title">
                 <h2>{months[currentDay.getMonth()]} {currentDay.getFullYear()}</h2>
             </div>
+            <button onClick={() => changeCurrentDay(today)}>
+                Today
+            </button>
             <div className="tools">
                 <button onClick={previousDay}>
                     <span className="material-icons">
@@ -15,9 +18,6 @@ export default function CalendarHeader({ currentDay, months, previousDay, nextDa
                     <span className="material-icons">
                         Next Month
                     </span>
-                </button>
-                <button onClick={() => changeCurrentDay(today)}>
-                    Today
                 </button>
             </div>
         </div>

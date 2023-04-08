@@ -88,7 +88,7 @@ export default function Calendar({ anime }) {
     <Fragment>
       <CalendarHeader changeCurrentDay={changeCurrentDay} currentDay={currentDay} months={months} previousDay={previousDay} nextDay={nextDay} today={today} />
       <div className="calendar-body">
-        {/* <TableHeader weekdays={weekdays} /> */}
+        <TableHeader weekdays={weekdays} />
         <div className="table-content">
           {
             getCalendarDays().map((day) => {
