@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment'
 // import CalendarHeader from './calendar_header';
 // import TableHeader from './table_header';
@@ -9,8 +9,8 @@ export default function MobileCalendar({ anime }) {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     // CalendarAnimeExpress - A website that offers a comprehensive calendar or tracker for airing schedules of currently airing anime series.
-    const [currentDay, setCurrentDay] = useState(new Date());
-    const today = new Date();
+    const [currentDay] = useState(new Date());
+    // const today = new Date();
 
     const findOutIfAnimeMatchesDay = (dayDate) => {
         let animeToShow = [];
@@ -40,21 +40,21 @@ export default function MobileCalendar({ anime }) {
         return animeToShow
     }
 
-    const changeCurrentDay = (day) => {
-        if (day.year) {
-            setCurrentDay(new Date(day.year, day.month, day.number));
-        } else {
-            setCurrentDay(today)
-        }
-    }
+    // const changeCurrentDay = (day) => {
+    //     if (day.year) {
+    //         setCurrentDay(new Date(day.year, day.month, day.number));
+    //     } else {
+    //         setCurrentDay(today)
+    //     }
+    // }
 
-    const nextDay = () => {
-        setCurrentDay(new Date(currentDay.getFullYear(), currentDay.getMonth() + 1, 1));
-    }
+    // const nextDay = () => {
+    //     setCurrentDay(new Date(currentDay.getFullYear(), currentDay.getMonth() + 1, 1));
+    // }
 
-    const previousDay = () => {
-        setCurrentDay(new Date(currentDay.getFullYear(), currentDay.getMonth() - 1, 1));
-    }
+    // const previousDay = () => {
+    //     setCurrentDay(new Date(currentDay.getFullYear(), currentDay.getMonth() - 1, 1));
+    // }
 
     const getCalendarDays = () => {
         const firstDayOfMonth = new Date(currentDay.getFullYear(), currentDay.getMonth(), 1);
