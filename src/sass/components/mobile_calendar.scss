@@ -1,0 +1,18 @@
+.container {
+    &_header {
+        display: flex;
+        &-events {
+            margin-left: 15%;
+        }
+    }
+    &_body {
+        &-wrapper {
+            display: flex;
+            &-anime {
+                width: 100%;
+                margin-left: 15%;
+            }
+        }
+        
+    }
+}
