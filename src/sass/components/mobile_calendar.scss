@@ -10,10 +10,32 @@
     &_body {
         &-wrapper {
             display: flex;
-            border-top: 1px solid blue;
+            scroll-margin-top: 10px;
+            width: 100%;
             &-anime {
-                width: 100%;
-                margin-left: 15%;
+                width: 70%;
+                margin-left: 7.5%;
+            }
+            &-date {
+                border-right: 1px solid;
+                padding-right: 3.5%;
+                width: 10%;
+                position: relative;
+                &-active:before {
+                    content: url("../../assets/active.svg");
+                    position: absolute;
+                    display: inline;
+                    top: -3.2%;
+                    right: -34%;
+                }
+                
+                &-inactive:before {
+                    content: url('../../assets/inactive.svg');
+                    position: absolute;
+                    display: inline;
+                    top: -3.2%;
+                    right: -34%;
+                }
             }
         }
         
