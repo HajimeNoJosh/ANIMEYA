@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment'
 // import CalendarHeader from './calendar_header';
 // import TableHeader from './table_header';
@@ -10,7 +10,13 @@ export default function MobileCalendar({ anime }) {
 
     // CalendarAnimeExpress - A website that offers a comprehensive calendar or tracker for airing schedules of currently airing anime series.
     const [currentDay] = useState(new Date());
-    // const today = new Date();
+    const [today] = useState(new Date());
+
+    useEffect(() => {
+        const element = document.getElementById("container-wrapper-" + today.toDateString())
+        if (element)
+            element.scrollIntoView({ behavior: 'smooth' })
+    }, [today])
 
     const findOutIfAnimeMatchesDay = (dayDate) => {
         let animeToShow = [];
@@ -76,7 +82,8 @@ export default function MobileCalendar({ anime }) {
                 month: firstDayOfMonth.getMonth(),
                 number: firstDayOfMonth.getDate(),
                 selected: (firstDayOfMonth.toDateString() === currentDay.toDateString()),
-                year: firstDayOfMonth.getFullYear()
+                year: firstDayOfMonth.getFullYear(),
+                id_for_element: firstDayOfMonth.toDateString()
             }
 
             currentDays.push(calendarDay);
@@ -111,7 +118,7 @@ export default function MobileCalendar({ anime }) {
                         ));
 
                         return (
-                            <div key={day.date} className="container_body-wrapper" >
+                            <div id={"container-wrapper-" + day.id_for_element} key={day.date} className="container_body-wrapper" >
                                 <div className="container_body-wrapper-date">
                                     <div className="container_body-wrapper-date-number">{day.number}</div>
                                 </div>
