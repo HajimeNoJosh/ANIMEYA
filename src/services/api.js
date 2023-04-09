@@ -1,4 +1,4 @@
-export function APICall(setStateObj) {
+export async function APICall(setStateObj) {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   let currentSeason = '';
@@ -89,8 +89,8 @@ export function APICall(setStateObj) {
     });
   }
 
-  function handleData(data) {
-    const ani = data.data.Page.media
+  async function handleData(data) {
+    const ani = data.data.Page.media;
     setStateObj(prevState => ({
       ...prevState,
       anime: [
@@ -100,13 +100,19 @@ export function APICall(setStateObj) {
     }));
 
     if (data.data.Page.pageInfo.hasNextPage) {
-      // Make another request for the next page
       const nextPage = data.data.Page.pageInfo.currentPage + 1;
       const nextVariables = { ...variables, page: nextPage };
       const nextOptions = { ...options, body: JSON.stringify({ query: query, variables: nextVariables }) };
-      fetch(url, nextOptions).then(handleResponse).then(handleData);
+      await fetch(url, nextOptions).then(handleResponse).then(handleData);
+    } else {
+      setStateObj(prevState => ({
+        ...prevState,
+        finished_fetching_anime: true
+      }));
     }
   }
 
-  fetch(url, options).then(handleResponse).then(handleData);
+  await fetch(url, options).then(handleResponse).then(handleData);
+
+  // Page will load only after all callbacks are finished
 }

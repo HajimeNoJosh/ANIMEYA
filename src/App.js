@@ -17,6 +17,7 @@ function App() {
     tempToken: "",
     user: {},
     anime: [],
+    finished_fetching_anime: false
   });
 
   return (

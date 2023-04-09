@@ -4,7 +4,7 @@ import { Title, Subtitle, Calendar, MobileCalendar } from "../components/export.
 function HomePage(props) {
   const isMobile = window.innerWidth < 900; // Example threshold for mobile screens
 
-  return props.anime.length > 0 ? (
+  return props.stateObj.finished_fetching_anime ? (
     <div className="page card_page">
       {isMobile ? (
         // Render mobile component
