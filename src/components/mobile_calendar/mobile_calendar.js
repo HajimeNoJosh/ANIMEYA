@@ -24,7 +24,7 @@ export default function MobileCalendar({ anime }) {
 
         const handleScroll = () => {
             // Get the current scroll position
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            // const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
             // Loop through elementRefs and find the top visible element
             let topMostVisibleElement = null; // Keep track of the topmost visible element
