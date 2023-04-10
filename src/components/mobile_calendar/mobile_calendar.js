@@ -5,7 +5,7 @@ import moment from 'moment'
 // import CalendarDayAnime from './calendar_day_anime';
 
 export default function MobileCalendar({ anime }) {
-    // const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     // CalendarAnimeExpress - A website that offers a comprehensive calendar or tracker for airing schedules of currently airing anime series.
@@ -147,7 +147,8 @@ export default function MobileCalendar({ anime }) {
                 number: firstDayOfMonth.getDate(),
                 selected: (firstDayOfMonth.toDateString() === currentDay.toDateString()),
                 year: firstDayOfMonth.getFullYear(),
-                id_for_element: firstDayOfMonth.toDateString()
+                id_for_element: firstDayOfMonth.toDateString(),
+                weekday: firstDayOfMonth.getDay()
             }
 
             currentDays.push(calendarDay);
@@ -184,7 +185,10 @@ export default function MobileCalendar({ anime }) {
                         return (
                             <div id={"container-wrapper-" + day.id_for_element} key={day.date} className="container_body-wrapper" >
                                 <div className={"container_body-wrapper-date"}>
-                                    <div className="container_body-wrapper-date-number">{day.number}</div>
+                                    <div>
+                                        <div className="container_body-wrapper-date-number">{day.number}</div>
+                                        <div>{weekdays[day.weekday]}</div>
+                                    </div>
                                 </div>
                                 <div className="container_body-wrapper-anime">
                                     <ul className="container_body-wrapper-anime-list">{formattedArray}</ul>

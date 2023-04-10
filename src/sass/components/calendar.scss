@@ -95,16 +95,12 @@
   .calendar-day p {
     position: absolute;
     right: 50%;
-    color: black;
+    // color: black;
     font-size: 1.5rem;
   }
   
-  .current * {
-    color: #000000;
-  }
-  
   .selected * {
-    color: #cc0000;
+    color: #80475e;
     font-weight: bold;
   }
 
@@ -121,8 +117,8 @@
       &-item {
         padding-top: 2%;
         padding-bottom: 2%;
-        color: white;
-        background-color: blue;
+        // color: white;
+        background-color: #1f363d;
         cursor: pointer;
       }
     }
