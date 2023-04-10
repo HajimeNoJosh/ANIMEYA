@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment'
 // import CalendarHeader from './calendar_header';
 // import TableHeader from './table_header';
-// import CalendarDayAnime from './calendar_day_anime';
+import CalendarDayAnimeMobile from './calendar_day_anime_mobile';
 
 export default function MobileCalendar({ anime }) {
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     // CalendarAnimeExpress - A website that offers a comprehensive calendar or tracker for airing schedules of currently airing anime series.
-    const [currentDay] = useState(new Date());
+    const [currentDay, setCurrentDay] = useState(new Date());
     const [today] = useState(new Date());
 
     useEffect(() => {
@@ -82,6 +82,14 @@ export default function MobileCalendar({ anime }) {
         };
     }, [today]);
 
+    const changeCurrentDay = (day) => {
+        if (day.year) {
+            setCurrentDay(new Date(day.year, day.month, day.number));
+        } else {
+            setCurrentDay(today)
+        }
+    }
+
     const findOutIfAnimeMatchesDay = (dayDate) => {
         let animeToShow = [];
         for (let i = 0; i < anime.length; i++) {
@@ -90,6 +98,7 @@ export default function MobileCalendar({ anime }) {
             for (let j = 0; j < air_dates.length; j++) {
                 const date = moment.unix(air_dates[j].airingAt);
                 const formattedDate = new Date(date);
+                const airTime = new Date(date).toLocaleTimeString();
 
                 formattedDate.setHours(0);
                 formattedDate.setMinutes(0);
@@ -98,14 +107,18 @@ export default function MobileCalendar({ anime }) {
 
                 const title = anime[i].title.english ? anime[i].title.english : anime[i].title.romaji ? anime[i].title.romaji : anime[i].title.native;
                 const image = anime[i].coverImage.extraLarge
+                const rating = anime[i].rating
                 const hasAnimeAlready = animeToShow.some(e => e.title === title)
                 if (formattedDate.getTime() === dayDate.getTime() && !hasAnimeAlready) {
-                    animeToShow.push({ title: title, image: image })
+                    animeToShow.push({ title: title, image: image, rating: rating, airTime: airTime })
                 } else {
                     continue
                 }
             }
         }
+        animeToShow = animeToShow.sort((a, b) => {
+            return parseFloat(a.airTime) - parseFloat(b.airTime)
+        });
 
         return animeToShow
     }
@@ -169,12 +182,14 @@ export default function MobileCalendar({ anime }) {
                 </div>
                 <div className='container_body'>
                     {getCalendarDays().map((day) => {
-                        const animeToShow = findOutIfAnimeMatchesDay(day.date);
+                        let animeToShow = findOutIfAnimeMatchesDay(day.date);
                         const formattedArray = animeToShow.map((item, index) => (
                             <li
                                 id={"anime-" + item.title}
                                 image={item.image}
                                 title={item.title}
+                                rating={item.rating}
+                                airTime={item.airTime}
                                 className="animeContent-anime"
                                 key={index}
                             >
@@ -191,7 +206,7 @@ export default function MobileCalendar({ anime }) {
                                     </div>
                                 </div>
                                 <div className="container_body-wrapper-anime">
-                                    <ul className="container_body-wrapper-anime-list">{formattedArray}</ul>
+                                    <CalendarDayAnimeMobile day={day} changeCurrentDay={changeCurrentDay} formattedArray={formattedArray}></CalendarDayAnimeMobile>
                                 </div>
                             </div>
                         );

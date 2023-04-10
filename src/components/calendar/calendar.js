@@ -20,17 +20,18 @@ export default function Calendar({ anime }) {
       for (let j = 0; j < air_dates.length; j++) {
         const date = moment.unix(air_dates[j].airingAt);
         const formattedDate = new Date(date);
-
+        const airTime = new Date(date).toLocaleTimeString();
         formattedDate.setHours(0);
         formattedDate.setMinutes(0);
         formattedDate.setSeconds(0);
         formattedDate.setMilliseconds(0);
 
         const title = anime[i].title.english ? anime[i].title.english : anime[i].title.romaji ? anime[i].title.romaji : anime[i].title.native;
-        const image = anime[i].coverImage.extraLarge
+        const image = anime[i].coverImage.extraLarge;
+        const rating = anime[i].rating
         const hasAnimeAlready = animeToShow.some(e => e.title === title)
         if (formattedDate.getTime() === dayDate.getTime() && !hasAnimeAlready) {
-          animeToShow.push({ title: title, image: image })
+          animeToShow.push({ title: title, image: image, rating: rating, airTime: airTime })
         } else {
           continue
         }
