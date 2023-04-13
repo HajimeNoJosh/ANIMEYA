@@ -92,6 +92,7 @@ export default function MobileCalendar({ anime }) {
 
     const findOutIfAnimeMatchesDay = (dayDate) => {
         let animeToShow = [];
+
         for (let i = 0; i < anime.length; i++) {
             let air_dates = anime[i].airingSchedule.nodes;
 
@@ -107,18 +108,15 @@ export default function MobileCalendar({ anime }) {
 
                 const title = anime[i].title.english ? anime[i].title.english : anime[i].title.romaji ? anime[i].title.romaji : anime[i].title.native;
                 const image = anime[i].coverImage.extraLarge
-                const rating = anime[i].rating
+                const rating = anime[i].averageScore
                 const hasAnimeAlready = animeToShow.some(e => e.title === title)
                 if (formattedDate.getTime() === dayDate.getTime() && !hasAnimeAlready) {
-                    animeToShow.push({ title: title, image: image, rating: rating, airTime: airTime })
+                    animeToShow.push({ title: title, image: image, rating: rating, airTime: airTime, hour: formattedDate.getHours(), minute: formattedDate.getMinutes() })
                 } else {
                     continue
                 }
             }
         }
-        animeToShow = animeToShow.sort((a, b) => {
-            return parseFloat(a.airTime) - parseFloat(b.airTime)
-        });
 
         return animeToShow
     }
@@ -189,7 +187,7 @@ export default function MobileCalendar({ anime }) {
                                 image={item.image}
                                 title={item.title}
                                 rating={item.rating}
-                                airTime={item.airTime}
+                                airtime={item.airTime}
                                 className="animeContent-anime"
                                 key={index}
                             >

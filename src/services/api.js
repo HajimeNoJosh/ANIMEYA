@@ -45,6 +45,7 @@ export async function APICall(setStateObj) {
             extraLarge
           }
           averageScore
+          popularity
           airingSchedule {
             nodes {
               airingAt

@@ -23,7 +23,7 @@ export default function PopoverAnime({ anime, popoverVisibility, handlePopoverTo
         >
             {/* Content for Popover 1 */}
             <div onClick={() => handlePopoverToggle(anime.props.title)}>
-                <span>{anime.props.airTime}</span>
+                <span>{anime.props.airtime}</span>
                 {anime}
             </div>
         </Popover>

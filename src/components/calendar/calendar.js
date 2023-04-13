@@ -28,7 +28,7 @@ export default function Calendar({ anime }) {
 
         const title = anime[i].title.english ? anime[i].title.english : anime[i].title.romaji ? anime[i].title.romaji : anime[i].title.native;
         const image = anime[i].coverImage.extraLarge;
-        const rating = anime[i].rating
+        const rating = anime[i].popularity;
         const hasAnimeAlready = animeToShow.some(e => e.title === title)
         if (formattedDate.getTime() === dayDate.getTime() && !hasAnimeAlready) {
           animeToShow.push({ title: title, image: image, rating: rating, airTime: airTime })

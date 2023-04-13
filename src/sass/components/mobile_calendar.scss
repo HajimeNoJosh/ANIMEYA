@@ -1,6 +1,7 @@
 .container {
     font-size: 2rem;
     padding: 5%;
+    
     &_header {
         display: flex;
         &-events {
@@ -29,17 +30,18 @@
                 &-active:after {
                     content: url("../../assets/active.svg");
                     position: absolute;
-                    display: inline;
-                    top: -3.2%;
-                    left: 8.7vw;
+                    width: 10px;
+                    top: -3%;
+                    left: 75%;
                 }
                 
                 &-inactive:after {
                     content: url('../../assets/inactive.svg');
                     position: absolute;
-                    display: inline;
-                    top: -3.2%;
-                    left: 8.7vw;
+                    width: 10px;
+                    top: -3%;
+                    left: 75%;
+                    // margin-left: -5px;
                 }
             }
         }
