@@ -91,7 +91,7 @@ export default function MobileCalendar({ anime }) {
     }
 
     const findOutIfAnimeMatchesDay = (dayDate) => {
-        let animeToShow = [];
+        const animeToShow = [];
 
         for (let i = 0; i < anime.length; i++) {
             let air_dates = anime[i].airingSchedule.nodes;
@@ -99,7 +99,7 @@ export default function MobileCalendar({ anime }) {
             for (let j = 0; j < air_dates.length; j++) {
                 const date = moment.unix(air_dates[j].airingAt);
                 const formattedDate = new Date(date);
-                const airTime = new Date(date).toLocaleTimeString();
+                const airTime = new Date(date);
 
                 formattedDate.setHours(0);
                 formattedDate.setMinutes(0);
@@ -110,6 +110,7 @@ export default function MobileCalendar({ anime }) {
                 const image = anime[i].coverImage.extraLarge
                 const rating = anime[i].averageScore
                 const hasAnimeAlready = animeToShow.some(e => e.title === title)
+
                 if (formattedDate.getTime() === dayDate.getTime() && !hasAnimeAlready) {
                     animeToShow.push({ title: title, image: image, rating: rating, airTime: airTime, hour: formattedDate.getHours(), minute: formattedDate.getMinutes() })
                 } else {
@@ -117,8 +118,13 @@ export default function MobileCalendar({ anime }) {
                 }
             }
         }
+        const sortedAnime = animeToShow.sort((anime1, anime2) => {
+            return (anime1.airTime > anime2.airTime) ?
+                1 : (anime1.airTime < anime2.airTime) ? -1
+                    : 0
+        });
 
-        return animeToShow
+        return sortedAnime
     }
 
     // const changeCurrentDay = (day) => {
@@ -187,7 +193,7 @@ export default function MobileCalendar({ anime }) {
                                 image={item.image}
                                 title={item.title}
                                 rating={item.rating}
-                                airtime={item.airTime}
+                                airtime={item.airTime.toLocaleTimeString()}
                                 className="animeContent-anime"
                                 key={index}
                             >
