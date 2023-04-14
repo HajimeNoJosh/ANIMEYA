@@ -44,6 +44,7 @@ export async function APICall(setStateObj) {
           coverImage {
             extraLarge
           }
+          description
           averageScore
           popularity
           airingSchedule {

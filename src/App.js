@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import "./sass/main.scss";
 
 import AllRoutes from "./pages/routes";

@@ -1,5 +1,6 @@
 .card-page {
     &--card {
+        font-size: 1.25rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -9,6 +10,11 @@
     }
 }
 
+
 .hidden {
     display: none !important;
+}
+
+.react-tiny-popover-container {
+    width: 35%;
 }
