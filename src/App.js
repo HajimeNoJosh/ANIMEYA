@@ -16,7 +16,8 @@ function App() {
     tempToken: "",
     user: {},
     anime: [],
-    finished_fetching_anime: false
+    finished_fetching_anime: false,
+    today: new Date()
   });
 
   return (

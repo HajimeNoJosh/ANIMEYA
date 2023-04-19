@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { APICall } from "../services/api.js";
-import axios from "axios";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 import HomePage from "../pages/home_page";
+import Scroll from "../javascript/scroll"
 
 function AllRoutes({
-  username,
   stateObj,
   setStateObj,
-  serverType,
 }) {
   let navigate = useNavigate();
 
@@ -17,8 +15,10 @@ function AllRoutes({
     if (stateObj.stateStatus === "initial") {
       APICall(setStateObj);
       navigate("/");
+    } else if (stateObj.stateStatus === "finished_fetching_anime") {
+      Scroll(stateObj.today)
     }
-  }, [navigate, stateObj.stateStatus, setStateObj]);
+  }, [navigate, stateObj.stateStatus, setStateObj, stateObj.today]);
 
   return (
     <Routes>
@@ -28,9 +28,6 @@ function AllRoutes({
         element={
           <HomePage
             stateObj={stateObj}
-            serverType={serverType}
-            axios={axios}
-            anime={stateObj.anime}
             setStateObj={setStateObj}
           />
         }
