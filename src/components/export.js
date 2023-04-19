@@ -2,10 +2,10 @@ import Title from './title';
 import Subtitle from './subtitle';
 import Input from './input';
 import Button from './button';
-import Card from './card';
+// import Card from './card';
 import Paragraph from './paragraph';
-import Calendar from './calendar/calendar';
-import MobileCalendar from './mobile_calendar/mobile_calendar';
+import CalendarDayAnimeMobile from './calendar_day_anime_mobile';
+import PopoverAnime from './popover_anime';
 
 
-export { Title, Subtitle, Input, Button, Card, Paragraph, Calendar, MobileCalendar }
+export { Title, Subtitle, Input, Button, Paragraph, CalendarDayAnimeMobile, PopoverAnime }

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment'
-// import CalendarHeader from './calendar_header';
-// import TableHeader from './table_header';
-import CalendarDayAnimeMobile from './calendar_day_anime_mobile';
+import { CalendarDayAnimeMobile } from "../components/export.js";
 
-export default function MobileCalendar({ anime }) {
+export default function BuildCalendar({ anime }) {
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    // CalendarAnimeExpress - A website that offers a comprehensive calendar or tracker for airing schedules of currently airing anime series.
     const [currentDay, setCurrentDay] = useState(new Date());
     const [today] = useState(new Date());
 
@@ -128,22 +125,6 @@ export default function MobileCalendar({ anime }) {
         return sortedAnime
     }
 
-    // const changeCurrentDay = (day) => {
-    //     if (day.year) {
-    //         setCurrentDay(new Date(day.year, day.month, day.number));
-    //     } else {
-    //         setCurrentDay(today)
-    //     }
-    // }
-
-    // const nextDay = () => {
-    //     setCurrentDay(new Date(currentDay.getFullYear(), currentDay.getMonth() + 1, 1));
-    // }
-
-    // const previousDay = () => {
-    //     setCurrentDay(new Date(currentDay.getFullYear(), currentDay.getMonth() - 1, 1));
-    // }
-
     const getCalendarDays = () => {
         const firstDayOfMonth = new Date(currentDay.getFullYear(), currentDay.getMonth(), 1);
         const weekdayOfFirstDay = firstDayOfMonth.getDay();
@@ -219,14 +200,6 @@ export default function MobileCalendar({ anime }) {
                     })}
                 </div>
             </div>
-            {/* <aside id="eventsContainer">
-                {events.map((event) => (
-                    <div key={event.id} className="event">
-                        <div className="eventTitle">{event.title}</div>
-                        <div className="eventTime">{event.time}</div>
-                    </div>
-                ))}
-            </aside> */}
         </div>
     );
 

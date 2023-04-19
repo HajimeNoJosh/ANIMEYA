@@ -95,6 +95,7 @@ export async function APICall(setStateObj) {
     const ani = data.data.Page.media;
     setStateObj(prevState => ({
       ...prevState,
+
       anime: [
         ...(prevState.anime),
         ...ani
@@ -109,7 +110,7 @@ export async function APICall(setStateObj) {
     } else {
       setStateObj(prevState => ({
         ...prevState,
-        finished_fetching_anime: true
+        stateStatus: "finished_fetching_anime"
       }));
     }
   }

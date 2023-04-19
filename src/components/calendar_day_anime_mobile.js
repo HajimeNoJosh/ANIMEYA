@@ -1,8 +1,7 @@
 import React, { Fragment, useState } from "react";
-import PopoverAnime from '../calendar/popover_anime';
+import { PopoverAnime } from "./export.js";
 
 export default function CalendarDayAnimeMobile({ day, formattedArray }) {
-    // const [isExpanded, setIsExpanded] = useState(false);
     const [popoverVisibility, setPopoverVisibility] = useState({});
 
     const handlePopoverToggle = (popoverId) => {

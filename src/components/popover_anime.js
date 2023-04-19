@@ -1,5 +1,5 @@
 import { Popover } from 'react-tiny-popover';
-import { Subtitle } from "../export.js";
+import { Subtitle } from "./export.js";
 import React from 'react';
 
 export default function PopoverAnime({ anime, popoverVisibility, handlePopoverToggle }) {

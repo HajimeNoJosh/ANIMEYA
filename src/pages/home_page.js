@@ -1,26 +1,12 @@
-import { Fragment } from "react";
-import { Title, Subtitle, Calendar, MobileCalendar } from "../components/export.js";
+import { Title, Subtitle } from "../components/export.js";
+import BuildCalendar from "./build_calendar.js";
 
 function HomePage(props) {
-  const isMobile = true //window.innerWidth < 900; // Example threshold for mobile screens
-
-  return props.stateObj.finished_fetching_anime ? (
+  return props.stateObj.stateStatus === "finished_fetching_anime" ? (
     <div className="page card_page">
-      {isMobile ? (
-        // Render mobile component
-        <Fragment>
-          <Title title="Animeya"></Title>
-          <Subtitle subtitle="Your premier way to get this seasons anime!" />
-          <MobileCalendar anime={props.anime} />
-        </Fragment>
-      ) : (
-        // Render web component
-        <Fragment>
-          <Title title="Animeya"></Title>
-          <Subtitle subtitle="Your premier way to get this seasons anime!" />
-          <Calendar anime={props.anime} />
-        </Fragment>
-      )}
+      <Title title="Animeya"></Title>
+      <Subtitle subtitle="Your premier way to get this seasons anime!" />
+      <BuildCalendar anime={props.anime} />
     </div>
   ) : (
     <div className="page">
